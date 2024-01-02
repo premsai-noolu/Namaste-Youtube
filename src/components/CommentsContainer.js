@@ -3,7 +3,7 @@ import React from "react";
 const commentsData = [
   {
     name: "prem",
-    text: "He is a go0dd boy",
+    text: "He is a good boy",
     replies: [],
   },
 ];
