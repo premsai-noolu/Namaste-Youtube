@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import CommentsContainer from "./CommentsContainer";
@@ -12,8 +12,12 @@ const WatchPage = () => {
   useEffect(() => {
     dispatch(closeMenu());
   });
+
+  const themes = useSelector((store) => store.theme.isTheme);
   return (
-    <div className="flex flex-col w-full">
+    <div
+      className={"flex flex-col w-full " + (themes && "bg-black text-white")}
+    >
       <div className="px-5 flex w-full">
         <div>
           <iframe

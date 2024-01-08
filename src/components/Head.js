@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
+import { toggleTheme } from "../utils/theme.slice";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -44,8 +45,19 @@ const Head = () => {
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
+
+  const changeTheme = () => {
+    dispatch(toggleTheme());
+  };
+  const themes = useSelector((store) => store.theme.isTheme);
+
   return (
-    <div className="grid grid-flow-col p-5 m-2 shadow-lg">
+    <div
+      className={
+        "grid grid-flow-col p-5 m-2 shadow-lg " +
+        (themes && "bg-black text-white")
+      }
+    >
       <div className="flex col-span-1 ">
         <img
           onClick={() => toggleMenuHandler()}
@@ -64,7 +76,10 @@ const Head = () => {
       <div className="col-span-10 px-32">
         <div>
           <input
-            className="w-1/2 border border-gray-400 p-2 rounded-l-full"
+            className={
+              "w-1/2 border border-gray-400 p-2 rounded-l-full " +
+              (themes && "text-black")
+            }
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -86,6 +101,14 @@ const Head = () => {
             </ul>
           </div>
         )}
+      </div>
+      <div className="col-span-1">
+        <button
+          className="border border-black p-2 rounded-lg"
+          onClick={() => changeTheme()}
+        >
+          Theme
+        </button>
       </div>
       <div className="col-span-1">
         <img
